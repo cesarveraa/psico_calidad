@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node -r esm server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon -r esm server.js",
+    "test": "jest --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,9 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.28.5",
+    "babel-jest": "^30.2.0",
+    "jest": "^30.2.0",
     "tailwindcss": "^3.4.3"
   }
 }

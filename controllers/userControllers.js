@@ -519,8 +519,13 @@ const saveSchedule = async (req, res, next) => {
 };
 
 export {
-  deleteUser, getAllUsers, loginUser, registerUser, requestPasswordReset,
-  resetPassword, saveSchedule, updateProfile,
-  updateProfilePicture, userProfile, verifyResetToken
+  deleteUser,
+  getAllUsers,
+  requestPasswordReset,
+  saveSchedule,
+  updateProfilePicture,
+  userProfile,
+  verifyResetToken,
 };
+
 
