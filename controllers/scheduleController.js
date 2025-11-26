@@ -1,6 +1,6 @@
 import Schedule from "../models/Schedule";
 
-export const getSchedulesByIds = async (req, res, next) => {
+ const getSchedulesByIds = async (req, res, next) => {
   try {
     const { ids } = req.body;
     const schedules = await Schedule.find({ _id: { $in: ids } }).populate('teacher');

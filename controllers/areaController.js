@@ -71,4 +71,4 @@ export const deleteArea = async (req, res) => {
   }
 };
 
- export {createArea, updateArea, getAreaById, deleteArea, getAreas}
+// export {createArea, updateArea, getAreaById, deleteArea, getAreas}

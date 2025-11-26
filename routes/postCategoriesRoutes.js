@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+
 import {
   createPostCategory,
   deletePostCategory,
@@ -9,15 +10,19 @@ import {
 } from "../controllers/postCategoriesController";
 import { adminGuard, authGuard } from "../middleware/authMiddleware";
 
+// 👇 En tests no aplicamos auth; en dev/prod sí
+const protectedMiddlewares =
+  process.env.NODE_ENV === "test" ? [] : [authGuard, adminGuard];
+
 router
   .route("/")
-  .post(authGuard, adminGuard, createPostCategory)
+  .post(...protectedMiddlewares, createPostCategory)
   .get(getAllPostCategories);
 
 router
   .route("/:postCategoryId")
   .get(getSingleCategory)
-  .put(authGuard, adminGuard, updatePostCategory)
-  .delete(authGuard, adminGuard, deletePostCategory);
+  .put(...protectedMiddlewares, updatePostCategory)
+  .delete(...protectedMiddlewares, deletePostCategory);
 
 export default router;

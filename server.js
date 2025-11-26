@@ -51,16 +51,22 @@ import {
 
 dotenv.config();
 
+// 👇 NUEVO: saber si estamos en modo test
+const isTest = process.env.NODE_ENV === "test";
+
 connectDB().then(() => {
-  initializeAboutUs();
-  initializeContactUs();
-  initializeHomePage();
-  initializeSCE();
-  initializeZA();
-  initializeProducts();
-  initializeProductCategories();
-  initializeDashboard();
-  initializePulpiComentarios();
+  // 👇 SOLO inicializar datos si NO estamos en test
+  if (!isTest) {
+    initializeAboutUs();
+    initializeContactUs();
+    initializeHomePage();
+    initializeSCE();
+    initializeZA();
+    initializeProducts();
+    initializeProductCategories();
+    initializeDashboard();
+    initializePulpiComentarios();
+  }
   console.log("Database connected successfully.");
 });
 
@@ -74,8 +80,8 @@ app.get("/", (req, res) => {
 
 // Rutas principales
 app.use("/api/users", userRoutes);
-app.use("/api/roles", rolesRoutes); 
-app.use("/api/passwords", PasswordHistory); 
+app.use("/api/roles", rolesRoutes);
+app.use("/api/passwords", PasswordHistory);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/post-categories", postCategoriesRoutes);
@@ -101,7 +107,7 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/pulpi", pulpiComentariosRouter);
 
 app.use("/api/logs", logsLoginRoutes);
-app.use('/api/logsSistema', logsSistemaRoutes);
+app.use("/api/logsSistema", logsSistemaRoutes);
 
 // Archivos estáticos
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
@@ -111,4 +117,11 @@ app.use(invalidPathHandler);
 app.use(errorResponserHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+
+// 👇 SOLO escuchar el puerto si NO estamos en test
+if (!isTest) {
+  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+}
+
+// 👇 Exportamos app para usarla en Supertest/Jest
+export default app;
