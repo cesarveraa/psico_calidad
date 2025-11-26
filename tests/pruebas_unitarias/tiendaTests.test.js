@@ -15,12 +15,12 @@
 import fs from 'fs';
 
 // MODELOS
-import Order from '../models/order';
-import Product from '../models/Productos';
-import FormaPago from '../models/FormaPago';
+import Order from '../../models/order';
+import Product from '../../models/Productos';
+import FormaPago from '../../models/FormaPago';
 
 // SERVICIOS
-import { sendApprovalEmail } from '../services/emailOrdersService';
+import { sendApprovalEmail } from '../../services/emailOrdersService';
 
 // CONTROLADORES
 import {
@@ -31,7 +31,7 @@ import {
   deleteOrder,
   setOrderApprovalStatus,
   setOrderAdminViewStatus,
-} from '../controllers/orderController';
+} from '../../controllers/orderController';
 
 import {
   createProduct,
@@ -39,7 +39,7 @@ import {
   getProductById,
   updateProduct,
   deleteProduct,
-} from '../controllers/productController';
+} from '../../controllers/productController';
 
 import {
   createFormaPago,
@@ -47,13 +47,13 @@ import {
   getFormaPagoById,
   updateFormaPago,
   deleteFormaPago,
-} from '../controllers/formaPagoController';
+} from '../../controllers/formaPagoController';
 
 // MOCKS DE MÓDULOS
-jest.mock('../models/order');
-jest.mock('../models/Productos');
-jest.mock('../models/FormaPago');
-jest.mock('../services/emailOrdersService');
+jest.mock('../../models/order');
+jest.mock('../../models/Productos');
+jest.mock('../../models/FormaPago');
+jest.mock('../../services/emailOrdersService');
 jest.mock('fs');
 
 // Helpers para simular res y next

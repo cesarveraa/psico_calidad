@@ -10,7 +10,7 @@
  * 3) VERIFICACIÓN / ASSERT (Assert)
  */
 
-import Role from '../models/Roles.js';
+import Role from '../../models/Roles.js';
 
 import {
   getAllRoles,
@@ -18,10 +18,10 @@ import {
   getRoleById,
   updateRole,
   deleteRole,
-} from '../controllers/rolesController'; // 👈 ajusta el nombre si tu archivo es distinto
+} from '../../controllers/rolesController.js';
 
 // MOCK DEL MODELO
-jest.mock('../models/Roles.js');
+jest.mock('../../models/Roles.js');
 
 // Helpers para simular res y next
 const createMockResponse = () => {

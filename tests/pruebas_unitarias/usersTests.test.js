@@ -17,15 +17,15 @@
 import crypto from 'crypto';
 
 // MODELOS
-import User from '../models/User';
-import Role from '../models/Roles.js';
-import Dashboard from '../models/Dashboard';
-import PasswordHistory from '../models/PasswordHistory.js';
+import User from '../../models/User.js';
+import Role from '../../models/Roles.js';
+import Dashboard from '../../models/Dashboard.js';
+import PasswordHistory from '../../models/PasswordHistory.js';
 
 // SERVICIOS / UTILIDADES
-import { sendVerificationEmail } from '../services/resetPasswordMailer';
-import myCache from '../cache';
-import * as loginLogs from '../controllers/logsLoginControllers.js';
+import { sendVerificationEmail } from '../../services/resetPasswordMailer.js';
+import myCache from '../../cache.js';
+import * as loginLogs from '../../controllers/logsLoginControllers.js';
 
 // FUNCIONES A PROBAR
 import {
@@ -34,19 +34,19 @@ import {
   getAllUsers,
   requestPasswordReset,
   verifyResetToken,
-} from '../controllers/userControllers.js';
+} from '../../controllers/userControllers.js';
 
 import { compare, hash } from 'bcryptjs';
 
 // ================== MOCKS ==================
 
 // Mockear modelos
-jest.mock('../models/User');
-jest.mock('../models/Roles.js');
-jest.mock('../models/PasswordHistory.js');
+jest.mock('../../models/User');
+jest.mock('../../models/Roles.js');
+jest.mock('../../models/PasswordHistory.js');
 
 // Dashboard necesita ser "constructible" y tener findOne
-jest.mock('../models/Dashboard', () => {
+jest.mock('../../models/Dashboard', () => {
   const DashboardMock = function (init = {}) {
     this.estudiantesPorSexo = init.estudiantesPorSexo || [];
     this.nuevosUsuarios = init.nuevosUsuarios || 0;
@@ -57,8 +57,8 @@ jest.mock('../models/Dashboard', () => {
 });
 
 // Servicios / utilidades
-jest.mock('../services/resetPasswordMailer');
-jest.mock('../cache', () => ({
+jest.mock('../../services/resetPasswordMailer');
+jest.mock('../../cache', () => ({
   set: jest.fn(),
   get: jest.fn(),
 }));
@@ -67,7 +67,7 @@ jest.mock('../cache', () => ({
 jest.mock('bcryptjs');
 
 // logs de login
-jest.mock('../controllers/logsLoginControllers.js', () => ({
+jest.mock('../../controllers/logsLoginControllers.js', () => ({
   saveLoginLog: jest.fn(),
 }));
 
@@ -369,7 +369,7 @@ describe('usersTests - Pruebas unitarias del controlador de usuarios (AAA)', () 
   // ============================================================================
   test('8) getAllUsers - responde con usuarios y roles como nombres', async () => {
     // 1) PREPARACIÓN (Arrange)
-    const { getAllUsers } = await import('../controllers/userControllers.js');
+    const { getAllUsers } = await import('../../controllers/userControllers.js');
 
     const req = {
       query: {
@@ -453,7 +453,7 @@ describe('usersTests - Pruebas unitarias del controlador de usuarios (AAA)', () 
   // ============================================================================
   test('10) verifyResetToken - responde 400 si el token es inválido', async () => {
     // 1) PREPARACIÓN (Arrange)
-    const { verifyResetToken } = await import('../controllers/userControllers.js');
+    const { verifyResetToken } = await import('../../controllers/userControllers.js');
 
     const req = { body: { token: 'invalid-token' } };
     const res = createMockResponse();

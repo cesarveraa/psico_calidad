@@ -11,9 +11,9 @@
  * 3) VERIFICACIÓN / ASSERT (Assert)
  */
 
-import PostCategories from '../models/PostCategories';
-import Post from '../models/Post';
-import { fileRemover } from '../utils/fileRemover';
+import PostCategories from '../../models/PostCategories';
+import Post from '../../models/Post';
+import { fileRemover } from '../../utils/fileRemover';
 
 // CONTROLADORES DE CATEGORÍAS
 import {
@@ -22,7 +22,7 @@ import {
   updatePostCategory,
   deletePostCategory,
   getSingleCategory,
-} from '../controllers/postCategoriesController';
+} from '../../controllers/postCategoriesController';
 
 // CONTROLADOR DE POSTS
 import {
@@ -32,12 +32,12 @@ import {
   getPost,
   likePost,
   respondToEvent,
-} from '../controllers/postControllers';
+} from '../../controllers/postControllers';
 
 // MOCK DE MODELOS Y UTILIDADES
-jest.mock('../models/PostCategories');
-jest.mock('../models/Post');
-jest.mock('../utils/fileRemover');
+jest.mock('../../models/PostCategories');
+jest.mock('../../models/Post');
+jest.mock('../../utils/fileRemover');
 
 // Helpers para simular res y next
 const createMockResponse = () => {
